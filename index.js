@@ -22,6 +22,9 @@ const { PubSub } = require('@google-cloud/pubsub');
 const pubSubClient = new PubSub();
 const topicName = process.env.PUB_TOPIC;
 
+const express = require('express');
+const app = express();
+
 const options = {
   polling: true
 };
@@ -82,4 +85,14 @@ bot.on('message', (msg) => {
 
   // Publish the message text to Google Cloud Pub/Sub with the specified format
   publishMessage(text).catch(console.error);
+});
+
+app.get('/', (req, res) => {
+  res.send('Telegram bot is running');
+});
+
+// This tells your app to listen on the port assigned by Google Cloud Run or 8080 if run locally
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

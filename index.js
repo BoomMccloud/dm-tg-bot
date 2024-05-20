@@ -20,7 +20,7 @@ const TelegramBot = require('node-telegram-bot-api');
 
 const { PubSub } = require('@google-cloud/pubsub');
 const pubSubClient = new PubSub();
-const topicName = process.env.PUB_TOPIC; // Replace with your Pub/Sub topic name
+const topicName = process.env.PUB_TOPIC;
 
 const options = {
   polling: true
